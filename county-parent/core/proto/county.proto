@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+//所生成的go的包名
+option go_package = "./county;service";
+
+package countyService;
+
+message CountyEntity{
+  int32 editor = 1;
+  string countyName = 2 ;
+  int32 schoolCount = 3;
+  int32 teacherCount = 4;
+  int32 classCount = 5;
+  string contactName = 6;
+  float eduInvest = 7;
+  float itlgInvest = 8;
+  string annualKeyword = 9;
+  string eduKeyword = 10;
+  string ctlFunc = 11;
+  string netOperator = 12;
+  string onlineCtl = 13;
+}
+
+message EditorRequest{
+  int32 editor = 1;
+}
+
+message NormalResult {
+  string message = 1;
+}
+
+message CountiesList{
+  repeated CountyEntity counties = 1;
+}
+
+message UpdateRequest{
+    EditorRequest editor = 1;
+    CountyEntity entity = 2;
+}
+
+message SearchRequest{
+
+}
+
+service countyRpc {
+  rpc Insert(CountyEntity) returns(NormalResult); //可能加上自定义返回结果会更好
+  rpc QueryDetailByEditor(EditorRequest) returns (CountyEntity);
+  rpc DeleteByEditor(EditorRequest) returns (NormalResult);
+  rpc UpdateByEditor(UpdateRequest) returns (NormalResult);
+  rpc QueryAll(google.protobuf.Empty) returns(CountiesList); //查询所有区县信息
+  rpc QueryDetailByKeywords(SearchRequest) returns(CountiesList); //es中调用 查询满足情况的es
+}

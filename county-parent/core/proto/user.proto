@@ -1,0 +1,55 @@
+//不存在该该声明时默认为proto2
+syntax = "proto3";
+
+//所生成的go的包名
+option go_package = "./user;service";
+
+//
+package userService;
+
+message UserEntity{
+  int32 ID = 1;
+  string username = 2;
+  string password = 3;
+  string nickname = 4;
+  int32 version = 7;
+}
+
+message LoginReq{
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResp{
+  int32 ID = 1;
+  string username = 2;
+  string nickname = 4;
+}
+
+message QueryUserDetailReq{
+  int32 ID = 1;
+}
+
+message QueryUserDetailResp{
+  int32 ID = 1;
+  string username = 2;
+  string password = 3;
+  string nickname = 4;
+  int32 version = 7;
+}
+
+message GreetReq{
+  string username = 1;
+}
+
+message GreetResp{
+  string result = 1;
+}
+
+// service后面跟的名字也会生成为包名 其中包含了供客户端调用的类型定义
+service userRpc{
+  rpc Login(LoginReq) returns(LoginResp);
+  rpc SayHello(GreetReq) returns(GreetResp);
+  rpc GetUserDetailByID(QueryUserDetailReq) returns (QueryUserDetailResp);
+}
+

@@ -1,0 +1,22 @@
+# 全局配置文件
+[PostgreSQL]
+host = "127.0.0.1"
+port = 5432
+db = "test"
+user = "postgres"
+password = "root"
+
+[Redis]
+host = "127.0.0.1"
+port = 6379
+no-database = 0
+password = ""
+
+[ElasticSearch]
+host = "127.0.0.1"
+post = 9200
+
+[SystemConfig]
+loginTimeout = "3s" # Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
+jwtSecret = "jenson_google_demo_secret_2022.9.1"
+issuer = "nwu_jenson999656"
